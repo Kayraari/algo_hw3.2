@@ -1,11 +1,9 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class GeneralTree {
-    Scanner keyboard= new Scanner(System.in);
+
 
     TreeNode root;
     public GeneralTree(){
@@ -98,7 +96,58 @@ public class GeneralTree {
         }
         System.out.println();
     }
-    public void findCommonManager(String name1, String name2){
+    public TreeNode findLCA(TreeNode current, String name1, String name2){
+        if(current==null)
+            return null;
+        if((current.name.equals(name1)) || (current.name.equals(name2)))
+            return current;
+        int count =0;
+        TreeNode tempResult= null;
 
+        TreeNode child = current.firstChild;
+        while(child!=null){
+            TreeNode res = findLCA(child, name1, name2);
+            if(res!=null){
+                count++;
+                tempResult=res;
+            }
+            child=child.nextSibling;
+        }
+        if(count >=2)
+            return current;
+        return tempResult;
+    }
+    public void findCommonManager(String name1, String name2){
+        TreeNode emp1 = findNode(root, name1);
+        TreeNode emp2 = findNode(root, name2);
+
+        if(emp1==null || emp2 ==null) {
+            System.out.println("Employee not found.");
+            return;
+        }
+        TreeNode lca=findLCA(root, name1, name2);
+        System.out.println("Common Manager: " +lca.name);
+    }
+    public int calculateSalary(TreeNode node){
+        if(node==null)
+            System.out.println("Employee not found.");
+
+        TreeNode child= node.firstChild;
+        int sum= node.salary;
+
+        while(child!=null){
+        sum += calculateSalary(child);
+        child=child.nextSibling;
+        }
+        return sum;
+    }
+
+    public void checkManager(String A, String B){
+        TreeNode emp1= findNode(root, A);
+        TreeNode emp2= findNode(root, B);
+        if(A==null|| B==null)
+            System.out.println("Employee not found.");
+
+        for(int i=0; i<)
     }
 }
