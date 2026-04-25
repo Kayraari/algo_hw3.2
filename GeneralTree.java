@@ -142,12 +142,16 @@ public class GeneralTree {
         return sum;
     }
 
-    public void checkManager(String A, String B){
+    public void checkManager(TreeNode current, String A, String B){
         TreeNode emp1= findNode(root, A);
         TreeNode emp2= findNode(root, B);
-        if(A==null|| B==null)
+        if(emp1==null|| emp2==null)
             System.out.println("Employee not found.");
 
-        for(int i=0; i<)
+        while(current.firstChild!= null){
+
+
+
+        }
     }
 }
